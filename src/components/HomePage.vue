@@ -1,3 +1,33 @@
+<script setup>
+import {ref} from 'vue'
+
+const lessons = ref([
+    {
+    subject: 'Maths',
+    location: 'London',
+    price: '300',
+    spaces: '0',
+    subject_image: '',
+    },
+    {
+    subject: 'English',
+    location: 'London',
+    price: '200',
+    spaces: '5',
+    subject_image: '',
+    },
+    {
+    subject: 'Music',
+    location: 'London',
+    price: '150',
+    spaces: '5',
+    subject_image: '',
+    },
+
+])
+
+</script>
+
 <template>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -7,29 +37,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
+        </li> -->
         
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div class="d-flex">
+        <a href=""><i class="fa-solid fa-cart-shopping"></i> Checkout</a>
+      </div>
     </div>
   </div>
 </nav>
@@ -53,50 +72,28 @@
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
+        
+        <div v-for="(lesson) in lessons" :key="lesson" class="col">
           <div class="card shadow-sm">
             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text">Subject: {{ lesson.subject }}</p>
+              <p class="card-text">Location: {{ lesson.location }}</p>
+              <p class="card-text">Price: &#163;{{ lesson.price }}</p>
+              <p class="card-text">Spaces: {{ lesson.spaces }}</p>
               <div class="">
-                <div class="">
-                  <button type="button" class="btn col-12 btn-outline-primary">VIEW</button>
+                <div v-if="lesson.spaces >= 5" class="">
+                  <button type="button" class="btn col-12 btn-outline-primary">Add to cart</button>
+                </div>
+                <div v-else class="">
+                  <button type="button" class="btn col-12 btn-outline-secondary disabled">Add to cart</button>
                 </div>
 
               </div>
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="">
-                <div class="">
-                  <button type="button" class="btn col-12 btn-outline-primary">VIEW</button>
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="">
-                <div class="">
-                  <button type="button" class="btn col-12 btn-outline-primary">VIEW</button>
-                  
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
         
       </div>
