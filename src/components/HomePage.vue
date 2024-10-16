@@ -1,8 +1,9 @@
 <script setup>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 
 const lessons = ref([
     {
+    id: 1,
     subject: 'Maths',
     location: 'London',
     price: '300',
@@ -10,6 +11,7 @@ const lessons = ref([
     subject_image: '',
     },
     {
+    id: 2,
     subject: 'English',
     location: 'London',
     price: '200',
@@ -17,6 +19,7 @@ const lessons = ref([
     subject_image: '',
     },
     {
+    id: 3,
     subject: 'Music',
     location: 'London',
     price: '150',
@@ -25,6 +28,13 @@ const lessons = ref([
     },
 
 ])
+const cart = ref([]);
+
+const addToCart = (lessonId) => {
+    cart.value.push(lessonId);
+};
+
+const cartCount = computed (() => cart.value.length);
 
 </script>
 
@@ -47,7 +57,7 @@ const lessons = ref([
         </form>
       </ul>
       <div class="d-flex">
-        <a href=""><i class="fa-solid fa-cart-shopping"></i> Checkout</a>
+        <a href="" class="btn btn-success"><i class="fa-solid fa-cart-shopping"></i><span class="badge text-white">{{ cartCount }}</span>Checkout</a>
       </div>
     </div>
   </div>
@@ -73,7 +83,7 @@ const lessons = ref([
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         
-        <div v-for="(lesson) in lessons" :key="lesson" class="col">
+        <div v-for="(lesson) in lessons" :key="lesson.id" class="col">
           <div class="card shadow-sm">
             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
             <div class="card-body">
@@ -83,7 +93,7 @@ const lessons = ref([
               <p class="card-text">Spaces: {{ lesson.spaces }}</p>
               <div class="">
                 <div v-if="lesson.spaces >= 5" class="">
-                  <button type="button" class="btn col-12 btn-outline-primary">Add to cart</button>
+                  <button type="button" v-on:click="addToCart(lesson.id)" class="btn col-12 btn-outline-primary">Add to cart</button>
                 </div>
                 <div v-else class="">
                   <button type="button" class="btn col-12 btn-outline-secondary disabled">Add to cart</button>
