@@ -2,6 +2,13 @@ import {ref} from 'vue'
 import mathImage from '@/assets/images/maths.jpg'
 import englishImage from '@/assets/images/english.jpg'
 import musicImage from '@/assets/images/music.jpg'
+import phpImage from '@/assets/images/php.png'
+import javascriptImage from '@/assets/images/javascript.png'
+import nodeImage from '@/assets/images/node.png'
+import htmlImage from '@/assets/images/html.png'
+import rubyImage from '@/assets/images/ruby.png'
+import pythonImage from '@/assets/images/python.png'
+import cyberImage from '@/assets/images/cyber.png'
 
 const lessons = ref([
     {
@@ -30,51 +37,51 @@ const lessons = ref([
     },
     {
     id: 4,
-    subject: 'Arts',
-    location: 'London',
-    price: '150',
-    spaces: '5',
-    subject_image: 'k',
-    },
-    {
-    id: 5,
-    subject: 'Programming',
-    location: 'London',
-    price: '150',
-    spaces: '5',
-    subject_image: '',
-    },
-    {
-    id: 6,
-    subject: 'Cyber security',
-    location: 'London',
-    price: '150',
-    spaces: '5',
-    subject_image: '',
-    },
-    {
-    id: 7,
     subject: 'PHP',
     location: 'London',
     price: '150',
     spaces: '5',
-    subject_image: '',
+    subject_image: phpImage,
+    },
+    {
+    id: 5,
+    subject: 'Javascript',
+    location: 'London',
+    price: '150',
+    spaces: '5',
+    subject_image: javascriptImage,
+    },
+    {
+    id: 6,
+    subject: 'Node JS',
+    location: 'London',
+    price: '150',
+    spaces: '5',
+    subject_image: nodeImage,
+    },
+    {
+    id: 7,
+    subject: 'Cyber security',
+    location: 'London',
+    price: '150',
+    spaces: '5',
+    subject_image: cyberImage,
     },
     {
     id: 8,
-    subject: 'DJango',
+    subject: 'Python',
     location: 'London',
     price: '150',
     spaces: '5',
-    subject_image: '',
+    subject_image: pythonImage,
     },
     {
     id: 9,
-    subject: 'NODE Js',
+    subject: 'Html',
     location: 'London',
     price: '150',
     spaces: '5',
-    subject_image: '',
+    subject_image: htmlImage,
     },
     {
     id: 10,
@@ -82,7 +89,7 @@ const lessons = ref([
     location: 'London',
     price: '150',
     spaces: '5',
-    subject_image: '',
+    subject_image: rubyImage,
     },
 
 ])
