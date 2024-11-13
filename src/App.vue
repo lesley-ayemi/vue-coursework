@@ -67,9 +67,24 @@ const validateForm = (e) => {
         return
     }
     
-    alert('Order has been submitted')
-     
+    
+    completeCheckout();
   }
+
+  // Complete Checkout
+const completeCheckout = () => {
+  alert("Order has been submitted");
+
+  // Clear the cart
+  cart.value = [];
+
+  // Reset input fields
+  name.value = "";
+  phoneNumber.value = "";
+
+  // Redirect back to the lessons view (assumes it's the homepage)
+  showCart.value = false;
+};
 
 // Search Feature
 const searchQuery = ref("");
