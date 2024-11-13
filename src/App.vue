@@ -140,7 +140,7 @@ const sortedLessons = computed(() => {
   
       </ul>
       <div class="d-flex">
-        <button @click="toggleView" class="btn btn-success">
+        <button @click="toggleView" class="btn btn-success" :disabled="cartCount === 0">
           <i class="fa-solid fa-cart-shopping"></i>
           <span class="badge text-white">{{ cartCount }}</span>
           {{ showCart ? 'Back to Lessons' : 'Checkout' }}
