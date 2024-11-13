@@ -71,6 +71,19 @@ const validateForm = (e) => {
      
   }
 
+// Sorting feature
+const selectedAttribute = ref("");
+const sortOrder = ref("asc");
+
+const sortedLessons = computed(() => {
+  return [...lessons.value].sort((a, b) => {
+    if (!selectedAttribute.value) return 0;
+    const modifier = sortOrder.value === "asc" ? 1 : -1;
+    if (a[selectedAttribute.value] < b[selectedAttribute.value]) return -1 * modifier;
+    if (a[selectedAttribute.value] > b[selectedAttribute.value]) return 1 * modifier;
+    return 0;
+  });
+});
 
 </script>
 
@@ -119,13 +132,25 @@ const validateForm = (e) => {
   </div>
 </section>
 <div class="text-center mb-3 my-2========">
+  <div class="row">
+    <div class="col-6">
+      <select name="" v-model="selectedAttribute" class="form-control" id="">
+        <option value="">Select Filter</option>
+        <option value="subject">Subject</option>
+        <option value="price">Price</option>
+        <option value="location">Location</option>
+        <option value="spaces">Spaces</option>
+      </select>
 
-  <button type="button" class="btn btn-primary">Subject</button>
-  <button type="button" class="btn btn-primary">Location</button>
-  <button type="button" class="btn btn-primary">Price</button>
-  <button type="button" class="btn btn-primary">Spaces</button>
-  <!-- <button type="button" class="btn btn-warning">Warning</button> -->
-  <!-- <button type="button" class="btn btn-info">Info</button> -->
+    </div>
+    <div class="col-6">
+      <select name="" v-model="sortOrder" class="form-control" id="">
+        <option value="asc">Asc</option>
+        <option value="desc">Desc</option>
+      </select>
+    </div>
+
+  </div>
 </div>
 
 
@@ -134,7 +159,7 @@ const validateForm = (e) => {
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       
-      <div v-for="(lesson) in lessons" :key="lesson.id" class="col">
+      <div v-for="(lesson) in sortedLessons" :key="lesson.id" class="col">
         <div class="card shadow-sm">
           <img :src="lesson.subject_image" alt="Lesson Image">
           <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
