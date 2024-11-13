@@ -127,7 +127,7 @@ const sortedLessons = computed(() => {
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Tutor</a>
+    <a class="navbar-brand" href="/">TUTOR</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -137,10 +137,7 @@ const sortedLessons = computed(() => {
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li> -->
         
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+  
       </ul>
       <div class="d-flex">
         <button @click="toggleView" class="btn btn-success">
@@ -201,7 +198,7 @@ const sortedLessons = computed(() => {
       
       <div v-for="(lesson) in displayedLessons" :key="lesson.id" class="col">
         <div class="card shadow-sm">
-          <img :src="lesson.subject_image" alt="Lesson Image">
+          <img :src="lesson.subject_image" alt="Lesson Image" width="385" height="200">
           <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
           <div class="card-body">
             <p class="card-text">Subject: {{ lesson.subject }}</p>
