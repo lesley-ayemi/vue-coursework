@@ -71,9 +71,31 @@ const validateForm = (e) => {
      
   }
 
+// Search Feature
+const searchQuery = ref("");
+
+// Computed property for filtering
+const filteredLessons = computed(() => {
+  return lessons.value.filter((lesson) => {
+    const lowerCaseQuery = searchQuery.value.toLowerCase();
+    return (
+      lesson.subject.toLowerCase().includes(lowerCaseQuery) ||
+      lesson.location.toLowerCase().includes(lowerCaseQuery) ||
+      lesson.price.toString().includes(lowerCaseQuery) ||
+      lesson.spaces.toString().includes(lowerCaseQuery)
+    );
+  });
+});
+
+// Determine which list to display
+const displayedLessons = computed(() => {
+  return searchQuery.value ? filteredLessons.value : sortedLessons.value;
+});
+
 // Sorting feature
 const selectedAttribute = ref("");
 const sortOrder = ref("asc");
+
 
 const sortedLessons = computed(() => {
   return [...lessons.value].sort((a, b) => {
@@ -132,6 +154,9 @@ const sortedLessons = computed(() => {
   </div>
 </section>
 <div class="text-center mb-3 my-2========">
+  <form action="">
+    <input type="text" class="form-control mb-2" placeholder="Search Shop" v-model="searchQuery">
+  </form>
   <div class="row">
     <div class="col-6">
       <select name="" v-model="selectedAttribute" class="form-control" id="">
@@ -159,7 +184,7 @@ const sortedLessons = computed(() => {
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       
-      <div v-for="(lesson) in sortedLessons" :key="lesson.id" class="col">
+      <div v-for="(lesson) in displayedLessons" :key="lesson.id" class="col">
         <div class="card shadow-sm">
           <img :src="lesson.subject_image" alt="Lesson Image">
           <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
