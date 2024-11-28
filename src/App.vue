@@ -122,6 +122,7 @@ const sortedLessons = computed(() => {
   });
 });
 
+
 </script>
 
 <template>
