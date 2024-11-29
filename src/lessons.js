@@ -7,7 +7,7 @@ const lessons = ref([
     "location": "London",
     "price": 300,
     "spaces": 6,
-    "subject_image": "/images/maths.jpg"
+    "subject_image": "images/maths.jpg"
     },
     {
     "id": 2,
@@ -15,7 +15,7 @@ const lessons = ref([
     "location": "London",
     "price": 200,
     "spaces": 5,
-    "subject_image": "/images/english.jpg"
+    "subject_image": "images/english.jpg"
     },
     {
     "id": 3,
@@ -23,7 +23,7 @@ const lessons = ref([
     "location": "New York",
     "price": 150,
     "spaces": 8,
-    "subject_image": "/images/music.jpg"
+    "subject_image": "images/music.jpg"
     },
     {
     "id": 4,
@@ -31,7 +31,7 @@ const lessons = ref([
     "location": "Dallas",
     "price": 150,
     "spaces": 14,
-    "subject_image": "/images/php.png"
+    "subject_image": "images/php.png"
     },
     {
     "id": 5,
@@ -39,7 +39,7 @@ const lessons = ref([
     "location": "Nigeria",
     "price": 150,
     "spaces": 8,
-    "subject_image": "/images/javascript.png"
+    "subject_image": "images/javascript.png"
     },
     {
     "id": 6,
@@ -47,7 +47,7 @@ const lessons = ref([
     "location": "Greece",
     "price": 150,
     "spaces": 5,
-    "subject_image": "/images/node.png"
+    "subject_image": "images/node.png"
     },
     {
     "id": 7,
@@ -55,7 +55,7 @@ const lessons = ref([
     "location": "Nigeria",
     "price": 150,
     "spaces": 5,
-    "subject_image": "/images/cyber.png"
+    "subject_image": "images/cyber.png"
     },
     {
     "id": 8,
@@ -63,7 +63,7 @@ const lessons = ref([
     "location": "Manchester",
     "price": 150,
     "spaces": 7,
-    "subject_image": "/images/python.png"
+    "subject_image": "images/python.png"
     },
     {
     "id": 9,
@@ -71,7 +71,7 @@ const lessons = ref([
     "location": "Malta",
     "price": 150,
     "spaces": 10,
-    "subject_image": "/images/html.png"
+    "subject_image": "images/html.png"
     },
     {
     "id": 10,
@@ -79,7 +79,7 @@ const lessons = ref([
     "location": "Malta",
     "price": 150,
     "spaces": 7,
-    "subject_image": "/images/ruby.png"
+    "subject_image": "images/ruby.png"
     }
 
 ])
