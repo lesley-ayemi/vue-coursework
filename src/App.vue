@@ -45,46 +45,120 @@ const name = ref("")
 const phoneNumber = ref("")
 const nameError = ref("")
 const phoneError = ref("")
+const isSubmitting = ref(false);
 
 // Form validation
-const validateForm = (e) => {
-  e.preventDefault() // Prevent form submission
-  
-    nameError.value = ""
-    phoneError.value = ""
-    
-    // Check if name contains only letters (no numbers or special characters)
-    const nameRegex = /^[A-Za-z\s]+$/;
-    if (!nameRegex.test(name.value)) {
-        nameError.value = "Full Name must contain letters only";
-        return
-    }
+const validateForm = async (e) => {
+  e.preventDefault(); // Prevent form submission
 
-    // Check if phone number contains only numbers
-    const phoneRegex = /^[0-9]+$/;
-    if (!phoneRegex.test(phoneNumber.value)) {
-        phoneError.value = "Phone number must contain numbers only";
-        return
-    }
-    
-    
-    completeCheckout();
+  nameError.value = "";
+  phoneError.value = "";
+
+  // Regex patterns
+  const nameRegex = /^[A-Za-z\s]+$/; // Allows letters and spaces
+  const phoneRegex = /^[0-9]+$/; // Allows only numbers
+
+  // Validate name
+  if (!nameRegex.test(name.value.trim())) {
+    nameError.value = "Full Name must contain letters only";
+    return;
   }
 
-  // Complete Checkout
-const completeCheckout = () => {
-  alert("Order has been submitted");
+  // Validate phone number
+  if (!phoneRegex.test(phoneNumber.value.trim())) {
+    phoneError.value = "Phone number must contain numbers only";
+    return;
+  }
 
-  // Clear the cart
-  cart.value = [];
-
-  // Reset input fields
-  name.value = "";
-  phoneNumber.value = "";
-
-  // Redirect back to the lessons view (assumes it's the homepage)
-  showCart.value = false;
+  // If no validation errors, proceed with form submission
+  if (!nameError.value && !phoneError.value) {
+    await submitForm();
+  }
 };
+
+// Complete Checkout
+const submitForm = async () => {
+  isSubmitting.value = true; // Start loading indicator
+
+  const order = {
+    customer: {
+      name: name.value.trim(),
+      phone: phoneNumber.value.trim(),
+    },
+    items: cart.value.map((product) => ({
+      id: product.id,
+      subject: product.subject,
+      price: product.price,
+      quantity: 1, // Assuming quantity is 1 for each product
+    })),
+    total: cart.value.reduce((sum, product) => sum + product.price, 0),
+  };
+
+  try {
+    const response = await fetch("http://localhost:4000/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(order),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to submit order");
+    }
+
+    const data = await response.json();
+    console.log("Order submitted:", data);
+    alert(data.message || "Order placed successfully!");
+
+    // Clear cart and reset form
+    cart.value = [];
+    name.value = "";
+    phoneNumber.value = "";
+  } catch (error) {
+    alert("Failed to submit order. Please try again.");
+  } finally {
+    isSubmitting.value = false; // Stop loading indicator
+  }
+};
+
+// // Form validation
+// const validateForm = (e) => {
+//   e.preventDefault() // Prevent form submission
+  
+//     nameError.value = ""
+//     phoneError.value = ""
+    
+//     // Check if name contains only letters (no numbers or special characters)
+//     const nameRegex = /^[A-Za-z\s]+$/;
+//     if (!nameRegex.test(name.value)) {
+//         nameError.value = "Full Name must contain letters only";
+//         return
+//     }
+
+//     // Check if phone number contains only numbers
+//     const phoneRegex = /^[0-9]+$/;
+//     if (!phoneRegex.test(phoneNumber.value)) {
+//         phoneError.value = "Phone number must contain numbers only";
+//         return
+//     }
+    
+    
+//     completeCheckout();
+//   }
+
+//   // Complete Checkout
+// const completeCheckout = () => {
+//   alert("Order has been submitted");
+
+//   // Clear the cart
+//   cart.value = [];
+
+//   // Reset input fields
+//   name.value = "";
+//   phoneNumber.value = "";
+
+//   // Redirect back to the lessons view (assumes it's the homepage)
+//   showCart.value = false;
+// };
 
 // Search Feature
 const searchQuery = ref("");
