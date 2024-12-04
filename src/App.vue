@@ -117,6 +117,7 @@ const submitForm = async () => {
     alert("Failed to submit order. Please try again.");
   } finally {
     isSubmitting.value = false; // Stop loading indicator
+    showCart.value = false;
   }
 };
 
